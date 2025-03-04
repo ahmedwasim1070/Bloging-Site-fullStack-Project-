@@ -8,10 +8,28 @@
     <%- include('./partials/nav') %>
 
     <div class="container mt-4">
-        <h1> <%= blog.title %> </h1>
-        <img width="500px" src="<%= blog.coverImgURL %>" alt="Blog Image">
-        <p><%= blog.body %></p>
+      <h1><%= blog.title %></h1>
+      <img width="500px" src="<%= blog.coverImgURL %>" alt="Blog Image" />
+      <p><%= blog.body %></p>
     </div>
-    <%- include('./partials/scripts') %>
+    <div class="container mt-4">
+      <img
+        src="<%= blog.createdBy.profileImageURL %>"
+        width="100px"
+        alt="Blog Image"
+      />
+      <p><%= blog.createdBy.fullName %></p>
+    </div>
+
+    <!-- Comments -->
+    <% if (locals.user) { %>
+    <div class="container mt-4">
+      <h1>Comments</h1>
+      <form action="/blog/comment/<%= blog._id %>" method="post">
+        <input type="text" placeholder="Leave a Comment" name="content">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <% } %> <%- include('./partials/scripts') %>
   </body>
 </html>
